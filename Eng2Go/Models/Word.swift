@@ -12,4 +12,11 @@ struct Word {
     var rusName: String
     var transcription: String?
     var urlImage: String?
+    var type: WordType
+}
+
+enum WordType: String {
+    case new = "new word"
+    case inProgress = "in progress"
+    case done = "learnt"
 }

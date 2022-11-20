@@ -25,7 +25,6 @@ class WordCardViewController: UIViewController {
     }
 }
 
-
 extension WordCardViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == engWordTextField {
@@ -42,20 +41,27 @@ extension WordCardViewController: UITextFieldDelegate {
     
     func getNewImage() {
         if let engWord = engWordTextField.text, engWordTextField.text != "" {
-            networkManager.fetchURLUnslashImage(for: engWord) { result in
+            networkManager.fetchURLUnslashImage(for: engWord) { [weak self] result in
+                guard let self = self else {
+                    return
+                }
                 switch result {
                 case .success(let url):
-                    DispatchQueue.global().async {
-                        guard let url = URL(string: url) else { return }
-                        guard let imageData = try? Data(contentsOf: url) else {
-                            DispatchQueue.main.async {
-                                self.imageView.image = UIImage(systemName: "pc")
+                    guard let url = URL(string: url) else { return }
+                    guard let imageData = try? Data(contentsOf: url) else {
+                        DispatchQueue.main.async { [weak self] in
+                            guard let self = self else {
+                                return
                             }
+                            self.imageView.image = UIImage(systemName: "pc")
+                        }
+                        return
+                    }
+                    DispatchQueue.main.async { [weak self] in
+                        guard let self = self else {
                             return
                         }
-                        DispatchQueue.main.async {
-                            self.imageView.image = UIImage(data: imageData)
-                        }
+                        self.imageView.image = UIImage(data: imageData)
                     }
                 case .failure(let error):
                     switch error {

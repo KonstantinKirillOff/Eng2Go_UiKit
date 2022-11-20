@@ -28,7 +28,8 @@ class NetworkManager {
         URLSession.shared.dataTask(with: url) { (data, _, error) in
             guard let data = data else {
                 complitionHandler(.failure(.badData))
-                return }
+                return
+            }
             
             do {
                 let picturesForRequesr = try JSONDecoder().decode(UnsplashResponse.self, from: data)
