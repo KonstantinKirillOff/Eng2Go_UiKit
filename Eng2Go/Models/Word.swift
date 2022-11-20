@@ -16,7 +16,7 @@ struct Word {
 }
 
 enum WordType: String {
-    case new = "new word"
-    case inProgress = "in progress"
-    case done = "learnt"
+    case new = "New"
+    case inProgress = "In progress"
+    case done = "Learnt"
 }

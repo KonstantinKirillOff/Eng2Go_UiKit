@@ -18,7 +18,8 @@ class WordListViewController: UITableViewController {
         return text.isEmpty
     }
     private var isFiltering: Bool {
-        searchController.isActive && !searchBarIsEmpty
+        let searchBarScopeIsFiltering = searchController.searchBar.selectedScopeButtonIndex != 0
+        return searchController.isActive && (!searchBarIsEmpty || searchBarScopeIsFiltering)
     }
     
     private var words = [Word(engName: "Dog", rusName: "Собачка", type: .new),
@@ -88,12 +89,22 @@ class WordListViewController: UITableViewController {
 
 extension WordListViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        filteredContentForSearchText(searchController.searchBar.text ?? "")
+        let searchBar = searchController.searchBar
+        if let scopeButtonTitles = searchBar.scopeButtonTitles {
+            filteredContentForSearchText(searchBar.text ?? "",
+                                         scope: scopeButtonTitles[searchBar.selectedScopeButtonIndex])
+        }
     }
     
     private func filteredContentForSearchText(_ searchText: String, scope: String = "All") {
         filteredWords = words.filter { word in
-            word.engName.lowercased().contains(searchText.lowercased())
+            let doesCategoryMatch = (scope == "All") || (scope == word.type.rawValue)
+            
+            if searchBarIsEmpty {
+                return doesCategoryMatch
+            } else {
+                return doesCategoryMatch && word.engName.lowercased().contains(searchText.lowercased())
+            }
         }
         tableView.reloadData()
     }
