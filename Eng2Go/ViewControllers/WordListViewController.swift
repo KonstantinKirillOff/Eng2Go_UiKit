@@ -9,24 +9,43 @@ import UIKit
 
 class WordListViewController: UITableViewController {
     
-    var words = [Word(engName: "Dog", rusName: "Собачка"),
-                 Word(engName: "Cat", rusName: "Кошечка")]
+    private let searchController = UISearchController(searchResultsController: nil)
+    private var filteredWords = [Word]()
+    private var searchBarIsEmpty: Bool {
+        guard let text = searchController.searchBar.text else {
+            return false
+        }
+        return text.isEmpty
+    }
+    private var isFiltering: Bool {
+        searchController.isActive && !searchBarIsEmpty
+    }
+    
+    private var words = [Word(engName: "Dog", rusName: "Собачка"),
+                         Word(engName: "Cat", rusName: "Кошечка"),
+                         Word(engName: "Catch", rusName: "Ловить"),
+                         Word(engName: "Category", rusName: "Категория"),
+    ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search word..."
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let destination = segue.destination as? WordCardViewController else { return }
         guard let indexPath = tableView.indexPathForSelectedRow else { return }
         
-        let word = words[indexPath.row]
+        var word: Word
+        if isFiltering {
+            word = filteredWords[indexPath.row]
+        } else {
+            word = words[indexPath.row]
+        }
         destination.word = word
     }
 
@@ -36,14 +55,24 @@ class WordListViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        words.count
+        if isFiltering {
+           return filteredWords.count
+        } else {
+           return words.count
+        }
+        
     }
 
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "wordCell", for: indexPath)
         var content = cell.defaultContentConfiguration()
-        let word = words[indexPath.row]
+        var word: Word
+        
+        if isFiltering {
+            word = filteredWords[indexPath.row]
+        } else {
+            word = words[indexPath.row]
+        }
         
         content.text = word.engName
         content.secondaryText = word.rusName
@@ -53,4 +82,17 @@ class WordListViewController: UITableViewController {
         return cell
     }
 
+}
+
+extension WordListViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        filteredContentForSearchText(searchController.searchBar.text ?? "")
+    }
+    
+    private func filteredContentForSearchText(_ searchText: String) {
+        filteredWords = words.filter({ (word: Word) -> Bool in
+            return word.engName.lowercased().contains(searchText.lowercased())
+        })
+        tableView.reloadData()
+    }
 }
