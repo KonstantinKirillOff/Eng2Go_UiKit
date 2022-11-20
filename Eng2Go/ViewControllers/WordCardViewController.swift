@@ -7,15 +7,40 @@
 
 import UIKit
 
-class WordDescriptionViewController: UIViewController {
-
+class WordCardViewController: UIViewController {
+    
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var engWordTextField: UITextField!
+    @IBOutlet weak var rusWordTextField: UITextField!
     
+    var word: Word!
     let networkManager = NetworkManager.shared
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        engWordTextField.delegate = self
+        engWordTextField.text = word.engName
+        rusWordTextField.text = word.rusName
+        getNewImage()
+    }
+}
 
-    @IBAction func searchButtonPressed() {
+
+extension WordCardViewController: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField == engWordTextField {
+            getNewImage()
+        }
+    }
+    
+    func showErrorAlert(tithText content: String) {
+        let alert = UIAlertController(title: "Request error", message: content, preferredStyle: .alert)
+        let action = UIAlertAction(title: "Ok", style: .default)
         
+        alert.addAction(action)
+    }
+    
+    func getNewImage() {
         if let engWord = engWordTextField.text, engWordTextField.text != "" {
             networkManager.fetchURLUnslashImage(for: engWord) { result in
                 switch result {
@@ -45,15 +70,5 @@ class WordDescriptionViewController: UIViewController {
             }
         }
     }
-}
-
-extension WordDescriptionViewController {
-    func showErrorAlert(tithText content: String) {
-        let alert = UIAlertController(title: "Request error", message: content, preferredStyle: .alert)
-        let action = UIAlertAction(title: "Ok", style: .default)
-        
-        alert.addAction(action)
-    }
-    
 }
 

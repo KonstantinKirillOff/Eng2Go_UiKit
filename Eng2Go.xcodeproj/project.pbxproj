@@ -9,20 +9,21 @@
 /* Begin PBXBuildFile section */
 		4368302428F695E70028A1CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4368302328F695E70028A1CF /* AppDelegate.swift */; };
 		4368302628F695E70028A1CF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4368302528F695E70028A1CF /* SceneDelegate.swift */; };
-		4368302828F695E70028A1CF /* WordDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4368302728F695E70028A1CF /* WordDescriptionViewController.swift */; };
+		4368302828F695E70028A1CF /* WordCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4368302728F695E70028A1CF /* WordCardViewController.swift */; };
 		4368302B28F695E70028A1CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4368302928F695E70028A1CF /* Main.storyboard */; };
 		4368302D28F695E80028A1CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4368302C28F695E80028A1CF /* Assets.xcassets */; };
 		4368303028F695E80028A1CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4368302E28F695E80028A1CF /* LaunchScreen.storyboard */; };
 		4368303828F6DEF60028A1CF /* WordListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4368303728F6DEF60028A1CF /* WordListViewController.swift */; };
 		4368303E28F6E08E0028A1CF /* UnsplashImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4368303D28F6E08E0028A1CF /* UnsplashImage.swift */; };
 		4368304128F6E0BD0028A1CF /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4368304028F6E0BD0028A1CF /* NetworkManager.swift */; };
+		4368304428F6F13A0028A1CF /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4368304328F6F13A0028A1CF /* Word.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4368302028F695E70028A1CF /* Eng2Go.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Eng2Go.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4368302328F695E70028A1CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4368302528F695E70028A1CF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		4368302728F695E70028A1CF /* WordDescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordDescriptionViewController.swift; sourceTree = "<group>"; };
+		4368302728F695E70028A1CF /* WordCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordCardViewController.swift; sourceTree = "<group>"; };
 		4368302A28F695E70028A1CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4368302C28F695E80028A1CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4368302F28F695E80028A1CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -30,6 +31,7 @@
 		4368303728F6DEF60028A1CF /* WordListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListViewController.swift; sourceTree = "<group>"; };
 		4368303D28F6E08E0028A1CF /* UnsplashImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashImage.swift; sourceTree = "<group>"; };
 		4368304028F6E0BD0028A1CF /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		4368304328F6F13A0028A1CF /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,7 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				4368303728F6DEF60028A1CF /* WordListViewController.swift */,
-				4368302728F695E70028A1CF /* WordDescriptionViewController.swift */,
+				4368302728F695E70028A1CF /* WordCardViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -112,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				4368303D28F6E08E0028A1CF /* UnsplashImage.swift */,
+				4368304328F6F13A0028A1CF /* Word.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -196,7 +199,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				4368304128F6E0BD0028A1CF /* NetworkManager.swift in Sources */,
-				4368302828F695E70028A1CF /* WordDescriptionViewController.swift in Sources */,
+				4368304428F6F13A0028A1CF /* Word.swift in Sources */,
+				4368302828F695E70028A1CF /* WordCardViewController.swift in Sources */,
 				4368303E28F6E08E0028A1CF /* UnsplashImage.swift in Sources */,
 				4368302428F695E70028A1CF /* AppDelegate.swift in Sources */,
 				4368303828F6DEF60028A1CF /* WordListViewController.swift in Sources */,
